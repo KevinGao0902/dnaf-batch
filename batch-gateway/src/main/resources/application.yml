@@ -1,0 +1,33 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: batch-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+sentinel:
+  transport:
+    dashboard: localhost:8858
+    port: 8719
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+gateway:
+  routes:
+    - id: core_route
+      uri: lb://batch-core
+      predicates:
+        - Path=/core/**
+      filters:
+        - StripPrefix=1
