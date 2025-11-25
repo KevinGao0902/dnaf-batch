@@ -1,15 +1,18 @@
-server:
-  port: 8082
 spring:
+  config:
+    import: nacos:batch-admin-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
   application:
     name: batch-admin
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,metrics,prometheus
-  prometheus:
-    metrics:
-      export:
-        enabled: true
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.24.114.4:8848
+        namespace: DNAF
+      config:
+        server-addr: 172.24.114.4:8848
+        namespace: DNAF
+        group: DEFAULT_GROUP
+        # 配置文件格式
+        file-extension: yml
