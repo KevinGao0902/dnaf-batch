@@ -50,4 +50,20 @@ dnaf-batch/
 
 ---
 
-如需详细 Prometheus、ELK 配置样例、K8s/Compose或更多分布式选主代码，欢迎随时补充需求！
+## 快速启动
+
+1. 各模块用 maven 构建/启动，需配置好 Nacos、Redis、Oracle 数据库
+2. 启动 batch-admin（端口 8082），gateway（端口 8080），core服务（端口 8081），Admin 控制台可见注册服务
+3. 任务分发由任意节点抢占“主节点”，主节点自动续租，如果宕机其余节点自动成为新主
+
+## 主节点抢主/续租/切主关键算法
+
+- Redis分布式锁 setIfAbsent 实现唯一主节点标记（含随机instanceId）
+- 主节点定时续租锁（刷新租期，保证可用）
+- 其他节点检测主节点消失，自动抢占成为新主
+- 自动报告主节点切换（可集成监控/报警）
+
+## 典型配置片段
+
+详见各模块 application.yml  
+如需 Oracle、Redis、Nacos 等环境，建议先用 Docker Compose 部署
