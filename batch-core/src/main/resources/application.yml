@@ -1,50 +1,18 @@
-server:
-  port: 8082
 spring:
+  config:
+    import: nacos:batch-core-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
   application:
     name: batch-core
-  datasource:
-    druid:
-      driver-class-name: oracle.jdbc.OracleDriver
-      url: jdbc:oracle:thin:@localhost:1521/ORCLCDB
-      username: youruser
-      password: yourpassword
-      initial-size: 5
-      min-idle: 5
-      max-active: 30
-      validation-query: SELECT 1 FROM DUAL
-      test-on-borrow: true
-      test-while-idle: true
-  batch:
-    jdbc:
-      initialize-schema: always
+  profiles:
+    active: dev
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 172.24.114.4:8848
+        namespace: DNAF
       config:
-        server-addr: 127.0.0.1:8848
-        file-extension: yaml
-  boot:
-    admin:
-          client:
-            url: http://localhost:8082
-  data:
-    redis:
-      host: localhost
-
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,metrics,prometheus
-  prometheus:
-    metrics:
-      export:
-        enabled: true
-
-sentinel:
-  transport:
-    dashboard: localhost:8858
-    port: 8719
+        server-addr: 172.24.114.4:8848
+        namespace: DNAF
+        group: DEFAULT_GROUP
+        # 配置文件格式
+        file-extension: yml
