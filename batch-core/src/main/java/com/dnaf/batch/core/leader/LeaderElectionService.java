@@ -1,7 +1,6 @@
-package com.dnaf.batch.core.job;
+package com.dnaf.batch.core.leader;
 
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -9,20 +8,20 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Redis实现主节点选举（可替换成Nacos/Consul更强一致性方案）
- */
 @Service
 public class LeaderElectionService {
     private static final String MASTER_KEY = "batch:master:node";
-    private static final long MASTER_LEASE = 30; // 秒
-    private static final long RENEW_INTERVAL = 10; // 秒
+    private static final long MASTER_LEASE = 30;
+    private static final long RENEW_INTERVAL = 10;
 
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+    private final StringRedisTemplate redisTemplate;
 
-    private String instanceId = UUID.randomUUID().toString();
+    private final String instanceId = UUID.randomUUID().toString();
     private volatile boolean isMaster = false;
+
+    public LeaderElectionService(StringRedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     @PostConstruct
     public void startLeaderElection() {
@@ -33,7 +32,6 @@ public class LeaderElectionService {
     public void leaderRenewalLoop() {
         String currentMaster = redisTemplate.opsForValue().get(MASTER_KEY);
         if (instanceId.equals(currentMaster)) {
-            // 当前是主节点，自动续租
             redisTemplate.expire(MASTER_KEY, MASTER_LEASE, TimeUnit.SECONDS);
             isMaster = true;
         } else if (currentMaster == null) {
@@ -51,5 +49,4 @@ public class LeaderElectionService {
 
     public boolean isMaster() { return isMaster; }
     public String getInstanceId() { return instanceId; }
-    public String getCurrentMasterId() { return redisTemplate.opsForValue().get(MASTER_KEY); }
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dnaf.batch.core.demo.mapper.LateChargeMapper">
+    <select id="queryPartitionKeys" resultType="com.dnaf.batch.core.demo.domain.PartitionKey">
+        SELECT MIN(id) AS startId, MAX(id) AS endId FROM LATE_CHARGE
+        GROUP BY customer_no LIMIT #{gridSize}
+    </select>
+    <select id="selectLateChargeByRange" resultType="com.dnaf.batch.core.demo.domain.LateChargeItem">
+        SELECT * FROM LATE_CHARGE WHERE id BETWEEN #{startId} AND #{endId}
+    </select>
+    <select id="runLateChargeProc" statementType="CALLABLE">
+        CALL PA_IR.S_CalculInt(
+            #{facId, mode=IN, jdbcType=INTEGER},
+            #{dueDate, mode=IN, jdbcType=VARCHAR},
+            #{outVal, mode=OUT, jdbcType=NUMERIC}
+        )
+    </select>
+</mapper>

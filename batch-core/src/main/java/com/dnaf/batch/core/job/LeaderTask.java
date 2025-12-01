@@ -1,5 +1,6 @@
 package com.dnaf.batch.core.job;
 
+import com.dnaf.batch.core.leader.LeaderElectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
