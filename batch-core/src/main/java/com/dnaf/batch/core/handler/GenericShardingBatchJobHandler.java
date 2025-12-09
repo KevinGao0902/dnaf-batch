@@ -1,5 +1,6 @@
 package com.dnaf.batch.core.handler;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.dnaf.batch.core.handler.demo.BatchJobContext;
 import com.dnaf.batch.core.handler.demo.DataBatch;
 import com.dnaf.batch.core.handler.demo.DataSlice;
@@ -29,8 +30,18 @@ public class GenericShardingBatchJobHandler {
      * 通过jobParam指定业务类型，例如：penalty_calculation, accounting_entry, repayment_detail
      */
     @XxlJob("genericShardingBatchJobHandler")
-    public void execute(String jobParam) {
+    public void execute() {
+
+        // 直接从 XxlJobHelper 获取参数
+        String jobParam = XxlJobHelper.getJobParam();
+
+        if (StringUtils.isBlank(jobParam)) {
+            log.error("任务参数为空");
+            XxlJobHelper.handleFail("任务参数不能为空");
+            return;
+        }
         // 1. 解析任务参数
+        log.info("开始执行任务，任务参数: {}", jobParam);
         JobParameters parameters = parseJobParameters(jobParam);
         String businessType = parameters.getBusinessType();
         String batchId = generateBatchId(businessType);
@@ -157,6 +168,8 @@ public class GenericShardingBatchJobHandler {
      */
     private JobParameters parseJobParameters(String jobParam) {
         JobParameters parameters = new JobParameters();
+
+        log.info("任务参数: {}", jobParam);
 
         if (jobParam == null || jobParam.isEmpty()) {
             throw new IllegalArgumentException("任务参数不能为空");
