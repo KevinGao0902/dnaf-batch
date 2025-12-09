@@ -56,8 +56,9 @@ public class FacirCalculationHandler extends AbstractBusinessHandler {
         QueryWrapper<FACIR> queryWrapper = new QueryWrapper<>();
         // 示例条件：查询尚未计算过或者超过某个时间的记录
         queryWrapper.isNull("firmtintcalcule").or().lt("firdtfin", context.getStartTime());
-
         List<FACIR> allRecords = facirService.list(queryWrapper);
+
+        log.info("查询到{}条待处理记录", allRecords.size());
 
         // 根据分片信息筛选属于当前分片的数据
         List<Long> dataIds = allRecords.stream()
