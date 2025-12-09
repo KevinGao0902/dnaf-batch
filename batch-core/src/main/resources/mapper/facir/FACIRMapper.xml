@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dnaf.batch.core.facir.mapper.FACIRMapper">
+
+    <resultMap id="BaseResultMap" type="com.dnaf.batch.core.facir.entity.FACIR">
+            <id property="facid" column="FACID" jdbcType="DECIMAL"/>
+            <id property="firttfid" column="FIRTTFID" jdbcType="DECIMAL"/>
+            <id property="firorder" column="FIRORDER" jdbcType="DECIMAL"/>
+            <result property="firmotif" column="FIRMOTIF" jdbcType="VARCHAR"/>
+            <result property="devcode" column="DEVCODE" jdbcType="VARCHAR"/>
+            <result property="taxcode" column="TAXCODE" jdbcType="VARCHAR"/>
+            <result property="rubid" column="RUBID" jdbcType="DECIMAL"/>
+            <result property="firdtdepart" column="FIRDTDEPART" jdbcType="TIMESTAMP"/>
+            <result property="firdtfin" column="FIRDTFIN" jdbcType="TIMESTAMP"/>
+            <result property="facidcalcule" column="FACIDCALCULE" jdbcType="DECIMAL"/>
+            <result property="fliordre" column="FLIORDRE" jdbcType="DECIMAL"/>
+            <result property="firorigine" column="FIRORIGINE" jdbcType="VARCHAR"/>
+            <result property="firmtforfait" column="FIRMTFORFAIT" jdbcType="DECIMAL"/>
+            <result property="firmtintcalcule" column="FIRMTINTCALCULE" jdbcType="DECIMAL"/>
+            <result property="firflagfacsepare" column="FIRFLAGFACSEPARE" jdbcType="DECIMAL"/>
+            <result property="firflagchq" column="FIRFLAGCHQ" jdbcType="DECIMAL"/>
+            <result property="firflagdiffere" column="FIRFLAGDIFFERE" jdbcType="DECIMAL"/>
+            <result property="firflagfacture" column="FIRFLAGFACTURE" jdbcType="DECIMAL"/>
+            <result property="firmtintfacturable" column="FIRMTINTFACTURABLE" jdbcType="DECIMAL"/>
+            <result property="firmtforfaitacquis" column="FIRMTFORFAITACQUIS" jdbcType="DECIMAL"/>
+            <result property="tciid" column="TCIID" jdbcType="DECIMAL"/>
+            <result property="ftvid" column="FTVID" jdbcType="DECIMAL"/>
+            <result property="firseuilretard" column="FIRSEUILRETARD" jdbcType="DECIMAL"/>
+            <result property="firdelaitolerance" column="FIRDELAITOLERANCE" jdbcType="DECIMAL"/>
+            <result property="firdelaipmt" column="FIRDELAIPMT" jdbcType="DECIMAL"/>
+            <result property="firtypeassiette" column="FIRTYPEASSIETTE" jdbcType="VARCHAR"/>
+            <result property="firmodecalcul" column="FIRMODECALCUL" jdbcType="VARCHAR"/>
+            <result property="firtypeforfait" column="FIRTYPEFORFAIT" jdbcType="VARCHAR"/>
+            <result property="firpctforfait" column="FIRPCTFORFAIT" jdbcType="DECIMAL"/>
+            <result property="firtxplancher" column="FIRTXPLANCHER" jdbcType="DECIMAL"/>
+            <result property="firtxplafond" column="FIRTXPLAFOND" jdbcType="DECIMAL"/>
+            <result property="fircomptenum" column="FIRCOMPTENUM" jdbcType="VARCHAR"/>
+            <result property="fircompteden" column="FIRCOMPTEDEN" jdbcType="VARCHAR"/>
+            <result property="firmtminimal" column="FIRMTMINIMAL" jdbcType="DECIMAL"/>
+            <result property="firtypeformule" column="FIRTYPEFORMULE" jdbcType="VARCHAR"/>
+            <result property="firarrondi" column="FIRARRONDI" jdbcType="VARCHAR"/>
+            <result property="ftvidplafond" column="FTVIDPLAFOND" jdbcType="DECIMAL"/>
+            <result property="ftvidplancher" column="FTVIDPLANCHER" jdbcType="DECIMAL"/>
+            <result property="facidpenalite" column="FACIDPENALITE" jdbcType="DECIMAL"/>
+            <result property="fliordrepenalite" column="FLIORDREPENALITE" jdbcType="DECIMAL"/>
+            <result property="sfaid" column="SFAID" jdbcType="DECIMAL"/>
+            <result property="firetat" column="FIRETAT" jdbcType="VARCHAR"/>
+            <result property="firmtcontractlate" column="FIRMTCONTRACTLATE" jdbcType="DECIMAL"/>
+            <result property="actidclient" column="ACTIDCLIENT" jdbcType="DECIMAL"/>
+            <result property="firmtlctax" column="FIRMTLCTAX" jdbcType="DECIMAL"/>
+            <result property="firmtmaximal" column="FIRMTMAXIMAL" jdbcType="DECIMAL"/>
+            <result property="firdaytype" column="FIRDAYTYPE" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        FACID,FIRTTFID,FIRORDER,
+        FIRMOTIF,DEVCODE,TAXCODE,
+        RUBID,FIRDTDEPART,FIRDTFIN,
+        FACIDCALCULE,FLIORDRE,FIRORIGINE,
+        FIRMTFORFAIT,FIRMTINTCALCULE,FIRFLAGFACSEPARE,
+        FIRFLAGCHQ,FIRFLAGDIFFERE,FIRFLAGFACTURE,
+        FIRMTINTFACTURABLE,FIRMTFORFAITACQUIS,TCIID,
+        FTVID,FIRSEUILRETARD,FIRDELAITOLERANCE,
+        FIRDELAIPMT,FIRTYPEASSIETTE,FIRMODECALCUL,
+        FIRTYPEFORFAIT,FIRPCTFORFAIT,FIRTXPLANCHER,
+        FIRTXPLAFOND,FIRCOMPTENUM,FIRCOMPTEDEN,
+        FIRMTMINIMAL,FIRTYPEFORMULE,FIRARRONDI,
+        FTVIDPLAFOND,FTVIDPLANCHER,FACIDPENALITE,
+        FLIORDREPENALITE,SFAID,FIRETAT,
+        FIRMTCONTRACTLATE,ACTIDCLIENT,FIRMTLCTAX,
+        FIRMTMAXIMAL,FIRDAYTYPE
+    </sql>
+</mapper>

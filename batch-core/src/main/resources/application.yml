@@ -10,6 +10,7 @@ spring:
       discovery:
         server-addr: 172.24.114.4:8848
         namespace: DNAF
+        group: DEFAULT_GROUP
       config:
         server-addr: 172.24.114.4:8848
         namespace: DNAF
